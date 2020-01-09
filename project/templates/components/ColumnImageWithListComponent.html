@@ -1,0 +1,96 @@
+<div id="{{ component.unique_id }}" class="recent-case-screen">
+    <div class="container-fluid">
+        <div class="recent-items">
+            <div class="row">
+                <div class="bg-wrap">
+                    {% if component.title or component.description %}
+                    <div class="col-md-12">
+                        {% if component.title %}
+                            <div class="green-title">
+                                <h2 class="title">{{ component.title }}</h2>
+                            </div>
+                        {% endif %}
+                        {% if component.description %}
+                            <div class="short-text">
+                                {{ component.description }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                </div> <!-- .bg-wrap -->
+            </div>
+        </div><!-- .recent-items -->
+    </div>
+</div> <!-- .recent-case-screen -->
+
+{% if component.css_style == 1 %}
+    <div class="recent-case-screen grey-bottom">
+        <div class="container-fluid">
+            <div class="recent-items">
+                <div class="row">
+                    {% for item in component.items.all %}
+                    <div class="{{ component.columns_count }}">
+                        <div
+                            class="recent-item two-columns verticals js-block-link"
+                            style="background-image: url({{ item.background.url }})"
+                            data-link="{{ item.button_url }}"
+                        >
+                            <div class="short-info">
+                                <div class="info">
+                                    <div class="title">{{ item.title }}</div>
+                                    <div class="text">
+                                        {{ item.description }}
+                                        <div class="items">
+                                            <div class="row">
+                                                {% for list_item in item.items.all %}
+                                                    <div class="col-xs-6">
+                                                        <span>{{ list_item.title }}</span>
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> <!-- .short-info -->
+                        </div>
+                    </div> <!-- .col-md-6 -->
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div> <!-- .verticals -->
+{% else %}
+    <div class="service-list">
+        <div class="container-fluid">
+            {% for item in component.items.all %}
+                <div class="service-item">
+                    <div class="row">
+                        <div class="{{ component.columns_count }}">
+                            <img class="service-img" src="{{ item.background.url }}" alt="{{ item.title }}" />
+                        </div>
+                        <div class="col-md-6">
+                            <div class="info">
+                                <div class="title">{{ item.title }}</div>
+                                <div class="description">
+                                    {{ item.description }}
+                                </div>
+                                <div class="skills">
+                                    {% if item.items_title %}
+                                        <div class="skills-title">{{ item.items_title }}</div>
+                                    {% endif %}
+                                    <div class="row">
+                                        {% for list_item in item.items.all %}
+                                            <div class="col-sm-6">
+                                                <span>{{ list_item.title }}</span>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}

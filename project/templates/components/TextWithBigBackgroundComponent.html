@@ -1,0 +1,21 @@
+<div id="{{ component.unique_id }}" class="text-with-background {% if component.css_style != 1 %}green{% endif %}" style="background-image: url({{ component.background.url  }})">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="title">{{ component.title }}</div>
+                <div class="short-text">{{ component.description|linebreaks }}</div>
+
+                {% if component.css_style == 3 %}
+                    <span class="green-button grey">BTC</span>
+                    <span class="green-button grey">BTH</span>
+                {% endif %}
+
+                {% if component.button_url %}
+                    <a href="{{ component.button_url }}" class="green-button {% if component.css_style != 3 %}width280{% endif %}">
+                        {{ component.button_title }}
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div> <!-- .text-with-background -->

@@ -1,0 +1,51 @@
+{% if component.view_type == 1 %} {# Default view #}
+    <div id="{{ component.unique_id }}" class="drop-us-line">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="get-in-touch">
+                        {{ component.title }}
+                    </div>
+                    <a href="{{ component.button_url }}" class="green-button width280 white">
+                        {{ component.button_title }}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% elif component.view_type == 2 %} {# Big size #}
+    <div id="{{ component.unique_id }}" class="get-in-touch-block">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="git-title">Get a Quote</div>
+                    <div class="git-text">
+                        {{ component.title }}
+                    </div>
+                    <div class="buttons">
+                        <a href="{{ component.button_url }}" class="green-button width280 white">
+                            {{ component.button_title }}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% elif component.view_type == 3 %} {# Fixed view #}
+    <div id="id-bottom-fixed-block-area" class="bottom-fixed-block-area">
+        <div id="id-bottom-block-fixed" class="bottom-block-fixed">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-8 text-part">
+                        {{ component.title }}
+                    </div>
+                    <div class="col-sm-4 button-part">
+                        <a href="{{ component.button_url }}" class="green-button white height40">
+                            {{ component.button_title }}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}

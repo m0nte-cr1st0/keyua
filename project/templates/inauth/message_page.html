@@ -1,0 +1,26 @@
+{% extends 'base_outer.html' %}
+{% load static %}
+
+{% block js %}{% endblock js %}
+
+{% block content %}
+	<div class="content">
+		<div class="outer-wrap center">
+			<div class="logo">
+				<a href="/"><img src="{% static 'images/landing/logo.png' %}" title="Incheck.Site" /></a>
+			</div>
+			<div class="logo-text">
+				Incheck is a professional resource for site owners and system administrators.
+			</div>
+
+			<div class="logo-text">{{ message }}</div>
+
+			<div class="form">
+				<div class="actions">
+					<a href="{% url 'landing' %}">Go home</a>
+				</div>
+			</div>
+
+		</div>
+	</div>
+{% endblock content %}

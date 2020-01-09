@@ -1,0 +1,78 @@
+### TODO: add to fabric file for auto updating
+apt-get update && apt-get upgrade
+
+adduser keyua
+sudo usermod -aG sudo keyua
+
+# Git
+sudo apt-get install git
+
+# Create ssk-key
+sudo ssh-keygen
+
+#### !!!!!! ONLY UBUNTU 14 or 16.04 !!!!!! ####
+sudo apt purge python2.7-minimal
+sudo apt-get install software-properties-common
+sudo add-apt-repository ppa:jonathonf/python-3.6
+sudo apt-get update
+sudo apt-get install python3.6
+sudo apt-get install python-software-properties
+
+
+sudo apt-get install build-essential autoconf libtool pkg-config python-opengl python-imaging python-pyrex python-pyside.qtopengl idle-python2.7 qt4-dev-tools qt4-designer libqtgui4 libqtcore4 libqt4-xml libqt4-test libqt4-script libqt4-network libqt4-dbus python-qt4 python-qt4-gl libgle3 python-dev libssl-dev
+
+sudo apt-get install python3 python-dev python3-dev \
+     build-essential libssl-dev libffi-dev \
+     libxml2-dev libxslt1-dev zlib1g-dev \
+     python-pip
+
+# Install vitrual environment
+sudo apt-get install python-pip python-dev build-essential
+sudo pip install virtualenv virtualenvwrapper
+sudo pip install --upgrade pip
+
+# Processors
+sudo pip install rcssmin
+sudo pip install rjsmin
+sudo apt-get install python3-rjsmin
+sudo apt-get install python3-rcssmin
+
+# Postgres
+sudo apt-get install postgresql postgresql-contrib
+# Create DB
+CREATE USER keyua WITH ENCRYPTED PASSWORD 'keyua';
+CREATE DATABASE keyua;
+CREATE DATABASE test_keyua;
+grant all privileges on database test_keyua to keyua;
+grant all privileges on database keyua to keyua;
+
+# nginx
+sudo apt-get install nginx
+
+# supervisord
+sudo apt-get install supervisor
+
+# celery
+pip install celery
+
+# uwsgi
+pip install uwsgi
+
+# add settings to supervisor, create file for it on /etc/supervisor/conf.d
+# /etc/supervisor/supervisord.conf
+
+# Create files for logs
+/tmp/keyua.pid
+
+mkdir logs
+vim logs/wsgi.log
+vim logs/wsgi_err.log
+vim logs/celery.log
+vim logs/celery_err.log
+
+# restart services
+/etc/init.d/nginx restart
+supervisorctl reload
+
+
+/home/keyua/keyua/env/lib/python3.6/site-packages/django/contrib/admin/static/admin

@@ -1,0 +1,80 @@
+{% load static i18n %}
+
+<div class="keyua-screen standart white-menu" style="background-image: url({% static 'images/portal/articles-bg.jpg' %})">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div id="id-mobile-menu" class="mobile-menu">
+                    <a onClick="hideMenu();return false;" class="m-close"></a>
+                    <ul>
+                        {% for page in pages %}
+                            <li><a href="{{ page.url }}" {% if page.id == current_page.id %}class="active"{% endif %}>{{ page.title }}</a></li>
+                        {% endfor %}
+                        <li><a class="active" href="{% url 'blog' %}">{% trans 'Blog' %}</a></li>
+                    </ul>
+                </div>
+                <div class="menu">
+                    <div class="relative-part">
+                        <a class="hamburger" onClick="showMenu();return false;"></a>
+                        <div class="logo pull-left">
+                            <a href="/">
+                                <img src="{% static 'images/portal/keyua-logo-white.png' %}" alt="KeyUa" />
+                            </a>
+                        </div>
+                        <div class="links pull-left">
+                            <ul class="ul-inline">
+                                {% for page in pages %}
+                                    {% if not page.is_index %}
+                                        <li><a href="{{ page.url }}" {% if page.id == current_page.id %}class="active"{% endif %}>{{ page.title }}</a></li>
+                                    {% endif %}
+                                {% endfor %}
+                                <li><a href="{% url 'blog' %}" class="active">{% trans 'Blog' %}</a></li>
+                            </ul>
+                        </div>
+                        <div class="button pull-right">
+                            <a href="/contacts/" class="green-button height40 orange-color">
+                                {% trans 'Get a Quote' %}
+                            </a>
+                        </div>
+                    </div>
+                </div><!-- .menu -->
+
+                <div class="clear"></div>
+
+                {% if current_category %}
+                <div class="text-promo show-after-1s">
+                    <div itemscope="" itemtype="http://schema.org/BreadcrumbList" class="page-breadcrumbs">
+                        <span itemscope="" itemprop="itemListElement" itemtype="http://schema.org/ListItem">
+                            <a itemprop="item" href="/">
+                                <span itemprop="name">Keyua</span>
+                                <meta itemprop="position" content="1">
+                            </a>
+                        </span>
+                        <span class="separate">/</span>
+                        <span itemscope="" itemprop="itemListElement" itemtype="http://schema.org/ListItem">
+                            <a itemprop="item" href="{% url 'blog' %}">
+                                <span itemprop="name">{% trans 'Blog' %}</span>
+                                <meta itemprop="position" content="2">
+                            </a>
+                        </span>
+                        <span class="separate">/</span>
+                        <span itemscope="" itemprop="itemListElement" itemtype="http://schema.org/ListItem">
+                            {{ current_category.title }}
+                        </span>
+                    </div>
+                    <h1 class="title h-white-title">
+                        {{ current_category.title }}
+                    </h1>
+                </div>
+                {% else %}
+                <div class="text-promo show-after-1s">
+                    <h1 class="title h-white-title">{% trans 'Blog' %}</h1>
+                    <p class="sub-title h-white-title">
+                        {% trans 'A blog for experienced product owners and executives' %}
+                    </p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div> <!-- .keyua-screen -->

@@ -1,0 +1,122 @@
+{% load static %}
+<div itemscope itemtype="http://schema.org/Blog" class="our-competences relative">
+    <div class="container-fluid">
+        <div class="blog-filters">
+            <div class="row">
+                <div class="col-md-9">
+                    <ul class="ul-inline">
+                        {% for category in categories %}
+                            <li>
+                                <a href="{{ category.get_url }}" itemprop="url" {% if current_category.id == category.id %}class="active"{% endif %}>
+                                    {{ category.title }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    {% if marked_category %}
+                        <a href="{{ marked_category.get_url }}" itemprop="url" class="green-button">
+                            {{ marked_category.title }}
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div> <!-- .blog-filters -->
+
+		<div class="blog-content">
+		    <div class="row">
+		    	{% for article in articles %}
+			        <div
+			        	itemprop="blogPosts"
+			        	itemscope
+			        	itemtype="http://schema.org/BlogPosting"
+			        	class="col-md-6"
+			        >
+			            <div
+			            	class="post-big js-block-link"
+			            	data-link="{{ article.get_url }}"
+			            	style="background-image: url({{ article.small_image.url }});"
+			            >
+			                <div
+			                	class="info"
+			                >	<a href="{{ article.get_url }}" itemprop="url" class="title">
+			                    	<span itemprop="headline" class="title">{{ article.title }}</span>
+			                    </a>
+
+			                    <div class="row">
+			                    	<div class="container-fluid">
+			                    		<div class="col-xs-6 text-left">
+						                    <div itemprop="author" class="name">
+						                    	{{ article.author }}
+						                    </div>
+			                    		</div>
+			                    		<div class="col-xs-6 text-right">
+						                    {% if article.date %}
+						                    	<div itemprop="datePublished" class="date">
+						                    		{{ article.date }}
+						                    	</div>
+						                    {% endif %}
+			                    		</div>
+			                    	</div>
+			                    </div>
+			                </div>
+			            </div>
+			        </div>
+		        {% endfor %}
+		    </div>
+		</div> <!-- .blog-content -->
+
+		<div class="page-pagination">
+	        <div class="row">
+	            <div class="col-md-12">
+	            	{% if not current_category %}
+		                <div class="pages pull-left">
+	                        {% for page in articles.paginator.page_range %}
+	                        	{% if page == 1 %}
+	                        		<a href="{% url 'blog' %}" class="{% if page == current_page %}active{% endif %}">{{ page }}</a>
+	                        	{% else %}
+	                        		<a href="{% url 'blog' page %}" class="{% if page == current_page %}active{% endif %}">{{ page }}</a>
+	                        	{% endif %}
+	                        {% endfor %}
+		                </div>
+		                <div class="buttons pull-left">
+		                	{% if articles.has_previous %}
+		                		{% if articles.previous_page_number == 1 %}
+		                    		<a href="{% url 'blog' %}" class="prev"></a>
+		                		{% else %}
+		                			<a href="{% url 'blog' articles.previous_page_number %}" class="prev"></a>
+		                		{% endif %}
+		                    {% endif %}
+		                    {% if articles.has_next %}
+		                    	<a href="{% url 'blog' articles.next_page_number %}" class="next"></a>
+		                    {% endif %}
+		                </div>
+	                {% else %}
+		                <div class="pages pull-left">
+	                        {% for page in articles.paginator.page_range %}
+	                        	{% if page == 1 %}
+	                        		<a href="{% url 'blog-category' current_category.url %}" class="{% if page == current_page %}active{% endif %}">{{ page }}</a>
+	                        	{% else %}
+	                        		<a href="{% url 'blog-category' current_category.url page %}" class="{% if page == current_page %}active{% endif %}">{{ page }}</a>
+	                        	{% endif %}
+	                        {% endfor %}
+		                </div>
+	                	<div class="buttons pull-left">
+		                	{% if articles.has_previous %}
+		                		{% if articles.previous_page_number == 1 %}
+		                			<a href="{% url 'blog-category' current_category.url %}" class="prev"></a>
+		                    	{% else %}
+		                    		<a href="{% url 'blog-category' current_category.url articles.previous_page_number %}" class="prev"></a>
+		                    	{% endif %}
+		                    {% endif %}
+		                    {% if articles.has_next %}
+		                    	<a href="{% url 'blog-category' current_category.url articles.next_page_number %}" class="next"></a>
+		                    {% endif %}
+		                </div>
+	                {% endif %}
+	            </div>
+	        </div>
+		</div> <!-- .page-pagination -->
+    </div>
+</div> <!-- .our-competences -->

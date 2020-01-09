@@ -1,0 +1,125 @@
+{% load static %}
+{% load i18n %}
+<div id="{{ component.unique_id }}" class="keyua-screen articles">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="menu">
+                    <div class="logo pull-left">
+                        <a href="/">
+                            <img src="{% static 'images/portal/keyua-logo-white.png' %}" alt="KeyUa" />
+                        </a>
+                    </div>
+                    <div class="links pull-left">
+                        <ul class="ul-inline">
+                            {% for page in pages %}
+                                {% if not page.is_index %}
+                                    <li><a href="{{ page.url }}" {% if page.id == current_page.id %}class="active"{% endif %}>{{ page.title }}</a></li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="button pull-right">
+                        <a href="/contacts/" class="green-button height40">
+                            {% trans 'Get a Quote' %}
+                        </a>
+                    </div>
+                </div><!-- .menu -->
+
+                <div class="clear"></div>
+
+                <div class="text-promo show-after-1s">
+                    <div class="page-breadcrumbs">
+                        <a href="/">Keyua</a> <span>/</span> <a href="/blog/">{% trans 'Blog' %}</a>
+                        <span>/</span> <a href="{{ article.category.get_url }}">{{ article.category.title }}</a>
+                    </div>
+                    <h1 class="title">
+                        {{ article.title }}
+                    </h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> <!-- .keyua-screen -->
+
+<div class="article-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="author">
+                    <img src="{{ article.author.background.url }}" alt="" />
+                    {% if article.author.linkedin_url %}
+                        <a href="{{ article.author.linkedin_url }}" class="linkedin">
+                            {{ article.author.title }}
+                        </a>
+                    {% endif %}
+                    <div class="info">{{ article.author.description }}</div>
+
+                    <div class="tags">
+                        {% for property in article.author.properties.all %}
+                            <span>{{ property.title }}</span>
+                        {% endfor %}
+                    </div>
+
+                </div> <!-- .author -->
+            </div>
+            <div class="col-md-9">
+                <div class="article">
+                    {% if article.intro %}<div class="short-article">{{ article.intro }}</div>{% endif %}
+                    <div>{{ article.contents|safe }}</div>
+                </div> <!-- .article -->
+                <div class="article">
+                    <div class="buttons">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <a href="/company/" class="green-button">About Keyua</a>
+                            </div>
+                            <div class="col-sm-4">
+                                <a href="/projects/" class="green-button">Our projects</a>
+                            </div>
+                            <div class="col-sm-4">
+                                <a href="/services/" class="green-button">Our services</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> <!-- .article-content -->
+
+{% if article.related_articles.count %}
+<div class="our-competences relative">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="green-title">
+                    <div class="title">{% trans 'Related publications' %}</div>
+                </div>
+            </div>
+        </div>
+        <div class="related-articles">
+            <div class="row">
+                {% for article in article.related_articles.all %}
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                        <div class="person">
+                            {% if article.small_image %}
+                            <div class="image">
+                                <a href="{{ article.get_url }}">
+                                    <img src="{{ article.small_image.url }}" alt="" />
+                                </a>
+                            </div>
+                            {% endif %}
+                            <div class="info">
+                                <div class="date">{{ article.date }}</div>
+                                <a href="{{ article.get_url }}" class="name">{{ article.title }}</a>
+                                <div class="position">{{ article.category.title }}</div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div> <!-- .related-articles -->
+    </div>
+</div> <!-- .our-competences -->
+{% endif %}

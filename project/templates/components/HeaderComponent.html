@@ -1,0 +1,232 @@
+{% load static i18n filters %}
+
+{% if component.css_style == 4 %}
+
+<div id="{{ component.unique_id }}" class="keyua-screen get-in-touch main-flex" xmlns="http://www.w3.org/1999/html">
+    <div class="map_wrapper">
+        <img src="{% static 'images/map_all.png' %}" class="contact_us_map main_map">
+        <img src="{% static 'images/usa.png' %}" class="hidden_map contact_us_map usa">
+        <img src="{% static 'images/england.png' %}" class="hidden_map contact_us_map england">
+        <img src="{% static 'images/ukraine.png' %}" class="hidden_map contact_us_map ukraine">
+
+        <img src="{% static 'images/address_line.png' %}" class="map_absolute hidden_map union big_union">
+        <img src="{% static 'images/address_line.png' %}" class="map_absolute hidden_map union little_union">
+
+        <img src="{% static 'images/pin.png' %}" class="map_absolute usa-pin">
+        <img src="{% static 'images/pin.png' %}" class="map_absolute england-pin">
+        <img src="{% static 'images/pin.png' %}" class="map_absolute ukraine-pin">
+
+        <div class="map_address hidden_map map_absolute usa-address">The United States, <span style="color: white"></br>Boston MA</span></div>
+        <div class="map_address hidden_map map_absolute england-address">The United Kingdom,<span style="color: white"></br>Glasgow Scotland,</br>Key House, 18 Seaward Place, Centurion Business Park</span></div>
+        <div class="map_address hidden_map map_absolute ukraine-address">Ukraine, Dnipro, <span style="color: white"></br>Hlinky St, 2</span></div>
+    </div>
+        <div class="container-fluid contact-form">
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="id-mobile-menu" class="mobile-menu">
+                        <a onClick="hideMenu();return false;" class="m-close"></a>
+                        <ul>
+                            {% for page in pages %}
+                                <li><a href="{{ page.url }}" {% if page.id == current_page.id %}class="active"{% endif %}>{{ page.title }}</a></li>
+                            {% endfor %}
+                            <li><a href="{% url 'blog' %}">{% trans 'Blog' %}</a></li>
+                        </ul>
+                    </div>
+                    <div class="menu">
+                        <div class="relative-part">
+                            <a class="hamburger" onClick="showMenu();return false;"></a>
+                            <div class="logo pull-left">
+                                <a href="/">
+                                    <picture>
+                                        <source srcset="{% static 'images/portal/keyua-logo-white.webp' %}" type="image/webp">
+                                        <source srcset="{% static 'images/portal/keyua-logo-white.png' %}" type="image/png">
+                                        <img src="{% static 'images/portal/keyua-logo-white.png' %}" alt="KeyUA" />
+                                    </picture>
+                                </a>
+                            </div>
+                            <div class="links pull-left">
+                                <ul class="ul-inline">
+                                    {% for page in pages %}
+                                        {% if not page.is_index %}
+                                            <li><a href="{{ page.url }}" {% if page.id == current_page.id %}class="active"{% endif %}>{{ page.title }}</a></li>
+                                        {% endif %}
+                                    {% endfor %}
+                                    <li><a href="{% url 'blog' %}">{% trans 'Blog' %}</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div><!-- .menu -->
+
+                    <div class="clear"></div>
+                    {% if contact_form.errors %}
+                        {% for field in contact_form %}
+                            {% for error in field.errors %}
+                                <div class="alert alert-danger">
+                                    <strong>{{ error|escape }}</strong>
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
+                        {% for error in contact_form.non_field_errors %}
+                            <div class="alert alert-danger">
+                                <strong>{{ error|escape }}</strong>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                    <form id="contact_form" class="get-in-touch-form" method="post" enctype="multipart/form-data" novalidate>
+                        {% csrf_token %}
+                        <h1 class="title {% if component.css_title_style %}{{ component.css_title_style }}{% endif %}">
+                            {{ component.title }}
+                        </h1>
+                        <p class="subtitle {% if component.css_subtitle_style %}{{ component.css_subtitle_style }}{% endif %}">
+                            {{ component.description }}
+                        </p>
+                        <div class="row">
+                            <div class="col-sm-6 contact_us_form">
+                                <div class="input-wrapper" style="position:relative">
+                                    {{ contact_form.name }}
+                                    <div class="contact_form_name" style="font-size:12px; position: absolute; right: 30px; top: 20px; color: #FD7900; display: none"></div>
+                                    <label for="id_name" class="start label-input" style="cursor: url('{% static 'images/cursor.png' %}'), text">Your name *</label>
+                                </div>
+                                <div class="input-wrapper" style="position:relative">
+                                    {{ contact_form.email }}
+                                    <div class="contact_form_email" style="font-size:12px; position: absolute; right: 30px; top: 20px; color: #FD7900; display: none"></div>
+                                    <label for="id_email" class="start label-input" style="cursor: url('{% static 'images/cursor.png' %}'), text">Your email *</label>
+                                </div>
+                                <div class="input-wrapper" style="position:relative">
+                                    {{ contact_form.phone }}
+                                    <label for="id_phone" class="start label-input phone_label" style="cursor: url('{% static 'images/cursor.png' %}'), text">Your phone number (optionally)</label>
+                                </div>
+                                <div class="input-wrapper" style="position: relative;">
+                                    {{ contact_form.text }}
+                                    <div class="contact_form_text" style="font-size:12px; position: absolute; right: 30px; top: 20px; color: #FD7900; display: none"></div>
+                                    <label for="id_text" class="start label-input" style="cursor: url('{% static 'images/cursor.png' %}'), text">Your message *</label>
+                                    <img id="clip" src="{% static 'images/clip.png' %}" onclick="document.querySelector('#id_file').click()">
+                                </div>
+                                <div class="input-wrapper" style="display: none">
+                                    {{ contact_form.file }}
+                                </div>
+                                <div class="input-wrapper progressbar" style="position: relative; display: none">
+                                    <img src="{% static 'images/rectangle.png' %}" style="width: 100%">
+                                    <span class="file_name" style="position: absolute; color: #DAD9E8; font-size: 15px; line-height: 18px; left: 5%; top: 27%"></span>
+                                    <span class="file_size" style="position: absolute; color: #DAD9E8; font-size: 15px; line-height: 18px; right: 7%; top: 27%"></span>
+                                    <img src="{% static 'images/trash.png' %}" class="remove_file" style="position: absolute; right: 2%; top: 25%; height: 50%; cursor: pointer">
+                                </div>
+                                <div class="input-wrapper nda_submit">
+                                    <div style="top: 50%">
+                                        <div class="contacts custom-checkbox">
+                                            {{ contact_form.nda }}
+                                            <label class="nda_label" for="checkbox1">Send me an NDA</label>
+                                        </div>
+                                    </div>
+                                    <img src="/static/images/loader.svg" height="65" alt="Loading..." style="display: none;">
+                                    <input type="submit" value="Send" class="green-button contacts">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div> <!-- .keyua-screen -->
+{% else %}
+    <div id="{{ component.unique_id }}" style="background-image: url({{ component.background.url }})" class="keyua-screen {% if component.css_style == 1 or component.css_style == 6 %}index{% else %}standart{% endif %} {% if component.css_style == 2 or component.css_style == 5 or component.css_style == 6 %}white-menu{% endif %}">
+<!--        {% if current_page|spacify == 'Home' %}-->
+<!--        <canvas id="particle-canvas" style="background-image: url({{ component.background.url }});"></canvas>-->
+<!--        <canvas id="cvs" style="background-image:url({{ component.background.url }})"></canvas>-->
+<!--        {% endif %}-->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="id-mobile-menu" class="mobile-menu">
+                        <a onClick="hideMenu();return false;" class="m-close"></a>
+                        <ul>
+                            {% for page in pages %}
+                                <li><a href="{{ page.url }}" {% if page.id == current_page.id %}class="active"{% endif %}>{{ page.title }}</a></li>
+                            {% endfor %}
+                            <li><a href="{% url 'blog' %}">{% trans 'Blog' %}</a></li>
+                        </ul>
+                    </div>
+                    <div class="menu">
+                        <div class="relative-part">
+                            <a class="hamburger" onClick="showMenu();return false;"></a>
+                            <div class="logo pull-left">
+                                <a href="/">
+                                {% if component.css_style == 2 or component.css_style == 5 or component.css_style == 6 %}
+                                    <picture>
+                                        <source srcset="{% static 'images/portal/keyua-logo-white.webp' %}" type="image/webp">
+                                        <source srcset="{% static 'images/portal/keyua-logo-white.png' %}" type="image/png">
+                                        <img src="{% static 'images/portal/keyua-logo-white.png' %}" alt="KeyUA" />
+                                    </picture>
+                                {% else %}
+                                    <picture>
+                                        <source srcset="{% static 'images/portal/keyua-logo.webp' %}" type="image/webp">
+                                        <source srcset="{% static 'images/portal/keyua-logo.png' %}" type="image/png">
+                                        <img src="{% static 'images/portal/keyua-logo.png' %}" alt="KeyUa" />
+                                    </picture>
+                                {% endif %}
+                                </a>
+                            </div>
+                            <div class="links pull-left">
+                                <ul class="ul-inline">
+                                    {% for page in pages %}
+                                        {% if not page.is_index %}
+                                            <li><a href="{{ page.url }}" {% if page.id == current_page.id %}class="active"{% endif %}>{{ page.title }}</a></li>
+                                        {% endif %}
+                                    {% endfor %}
+                                    <li><a href="{% url 'blog' %}">{% trans 'Blog' %}</a></li>
+                                </ul>
+                            </div>
+                            {% if component.top_button_title %}
+                            <div class="button pull-right">
+                                <a href="{{ component.top_button_url }}" class="green-button height40">{{ component.top_button_title }}</a>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div><!-- .menu -->
+
+                    <div class="clear"></div>
+
+                    <div class="text-promo show-after-1s">
+
+                        {% if current_page.show_breadcrumbs %}
+                            <div class="page-breadcrumbs">
+                                {{ current_page.get_breadcrumbs|safe }}
+                            </div>
+                        {% endif %}
+                        {% if component.sub_title %}
+                            {% if component.css_style == 1 or component.css_style == 6 %}
+                                <p class="sub-title {% if component.css_subtitle_style %}{{ component.css_subtitle_style }}{% endif %}">{{ component.sub_title }}</p>
+                                <h1 class="title {% if component.css_title_style %}{{ component.css_title_style }}{% endif %}">{{ component.title|safe }}</h1>
+                            {% else %}
+                                {% if component.css_style == 5 %}
+                                    <h1 class="title without-uppercase {% if component.css_title_style %}{{ component.css_title_style }}{% endif %}">{{ component.title|safe }}</h1>
+                                    <p class="sub-title without-uppercase {% if component.css_subtitle_style %}{{ component.css_subtitle_style }}{% endif %}">{{ component.sub_title }}</p>
+                                {% else %}
+                                    <h1 class="title {% if component.css_title_style %}{{ component.css_title_style }}{% endif %}">{{ component.title|safe }}</h1>
+                                    <p class="sub-title {% if component.css_subtitle_style %}{{ component.css_subtitle_style }}{% endif %}">{{ component.sub_title }}</p>
+                                {% endif %}
+                            {% endif %}
+                        {% else %}
+                            {% if component.css_style == 1 or component.css_style == 6 %}
+                                <h1 class="title {% if component.css_title_style %}{{ component.css_title_style }}{% endif %}">{{ component.title|safe }}</h1>
+                            {% else %}
+                                {% if component.css_style == 5 %}
+                                    <h1 class="title without-uppercase {% if component.css_title_style %}{{ component.css_title_style }}{% endif %}">{{ component.title|safe }}</h1>
+                                {% else %}
+                                    <h1 class="title {% if component.css_title_style %}{{ component.css_title_style }}{% endif %}">{{ component.title|safe }}</h1>
+                                {% endif %}
+                            {% endif %}
+                        {% endif %}
+
+                        {% if component.white_button_title or component.green_button_title %}
+                        <div class="buttons">
+                            <a href="{{ component.green_button_url }}" class="green-button width280 white indent-button">{{ component.green_button_title }}</a>
+                            <a href="{{ component.white_button_url }}" class="green-button width280">{{ component.white_button_title }}</a>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- .keyua-screen -->
+{% endif %}

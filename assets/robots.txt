@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /keyua-admin/
+Disallow: /contacts/
+Disallow: /simple-api/
+Disallow: /api/inauth/
+Sitemap: https://keyua.org/sitemap.xml

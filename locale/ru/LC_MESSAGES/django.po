@@ -1,0 +1,297 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-08-05 09:37+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
+"%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: project/inauth/auth.py:45
+msgid "Email missing."
+msgstr "Почта отсутствует."
+
+#: project/inauth/auth.py:49
+msgid "Password missing."
+msgstr "Пароль отсутствует."
+
+#: project/inauth/auth.py:53
+msgid "Your account is not active, please contact with administrator."
+msgstr "Ваш аккаунт неактивен, пожалуйста, связитесь с администратором."
+
+#: project/inauth/auth.py:57
+msgid "Current email not found in system. Please register at first"
+msgstr "Ел. почта не найдена в системе. Пожалуйста, зарегистрируйтесь прежде."
+
+#: project/inauth/auth.py:61
+msgid "Invalid password."
+msgstr "Неверный пароль."
+
+#: project/mailing/consts.py:31
+#, python-brace-format
+msgid "{site_domain}: Congratulations, you have registered!"
+msgstr "{site_domain}: Поздравляем, вы успешно зарегистрировались!"
+
+#: project/mailing/consts.py:32
+#, python-brace-format
+msgid "{site_domain}: Password reset request."
+msgstr "{site_domain}: Запрос на изменение пароля."
+
+#: project/mailing/consts.py:33
+#, python-brace-format
+msgid "{site_domain}: You have reseted password successful."
+msgstr "{site_domain}: Вы успешно сбросили пароль."
+
+#: project/mailing/consts.py:34
+#, python-brace-format
+msgid "{site_domain}: Please confirm your email."
+msgstr "{site_domain}: Пожалуйста, подтвердите свой пароль."
+
+#: project/settings.py:36
+msgid "English"
+msgstr "Английский"
+
+#: project/templates/base.html:62
+msgid ""
+"\n"
+"                                            Custom software development for "
+"Web, Mobile, and Desktop. Our clients: Online Divorce, Venda, The Football "
+"Pools, Maxymiser, LexisNexis, William Hill, The Payroll Centre, Frankie & "
+"Benny's.\n"
+"                                            "
+msgstr ""
+
+#: project/templates/base.html:70
+msgid "Company"
+msgstr ""
+
+#: project/templates/base.html:74
+msgid "Home"
+msgstr ""
+
+#: project/templates/base.html:75
+msgid "About"
+msgstr ""
+
+#: project/templates/base.html:76
+msgid "Services"
+msgstr ""
+
+#: project/templates/base.html:81
+msgid "Portfolio"
+msgstr ""
+
+#: project/templates/base.html:82
+msgid "Industries"
+msgstr ""
+
+#: project/templates/base.html:83 project/templates/blog/article.html:65
+#: project/templates/blog/article.html:83
+#: project/templates/blog/article.html:107
+#: project/templates/blog/includes/blog_header.html:13
+#: project/templates/blog/includes/blog_header.html:31
+#: project/templates/blog/includes/blog_header.html:56
+#: project/templates/blog/includes/blog_header.html:71
+#: project/templates/components/ArticleComponent.html:33
+#: project/templates/components/BlogHeaderComponent.html:34
+#: project/templates/components/HeaderComponent.html:14
+#: project/templates/components/HeaderComponent.html:32
+#: project/templates/components/HeaderComponent.html:65
+#: project/templates/components/HeaderComponent.html:87
+#: project/templates/components/ProjectPageComponent.html:14
+#: project/templates/components/ProjectPageComponent.html:32
+msgid "Blog"
+msgstr ""
+
+#: project/templates/base.html:84
+msgid "ICO"
+msgstr ""
+
+#: project/templates/base.html:91
+msgid "Explore"
+msgstr ""
+
+#: project/templates/base.html:100
+msgid "Contacts"
+msgstr ""
+
+#: project/templates/blog/article.html:88
+#: project/templates/blog/includes/blog_header.html:36
+#: project/templates/components/ArticleComponent.html:24
+#: project/templates/components/BlogHeaderComponent.html:25
+#: project/templates/components/ProjectPageComponent.html:36
+msgid "Get a Quote"
+msgstr ""
+
+#: project/templates/blog/article.html:233
+#: project/templates/components/ArticleComponent.html:97
+msgid "Related publications"
+msgstr ""
+
+#: project/templates/blog/includes/blog_header.html:73
+msgid "A blog for experienced product owners and executives"
+msgstr ""
+
+#: project/templates/components/ProjectPageComponent.html:62
+msgid "Visit client's website"
+msgstr ""
+
+#: project/templates/components/ProjectPageComponent.html:88
+msgid "Location"
+msgstr ""
+
+#: project/templates/components/ProjectPageComponent.html:94
+msgid "Industry"
+msgstr ""
+
+#: project/templates/components/ProjectPageComponent.html:100
+msgid "Team size"
+msgstr ""
+
+#: project/templates/components/ProjectPageComponent.html:106
+msgid "Partnership period"
+msgstr ""
+
+#: project/templates/components/ProjectPageComponent.html:121
+msgid "Achievement"
+msgstr ""
+
+#: project/templates/components/ProjectPageComponent.html:144
+msgid "Key facts"
+msgstr ""
+
+#: project/utils/mixins.py:77
+msgid "First Name"
+msgstr "Имя"
+
+#: project/utils/mixins.py:78
+msgid "E-mail"
+msgstr "Ел. почта"
+
+#: project/utils/mixins.py:79
+msgid "Password"
+msgstr "Пароль"
+
+#: project/utils/mixins.py:80
+msgid "Send"
+msgstr "Отправить"
+
+#: project/utils/mixins.py:81
+msgid "forgot password"
+msgstr "забыли пароль"
+
+#: project/utils/mixins.py:82 project/utils/mixins.py:105
+msgid "login"
+msgstr "войти"
+
+#: project/utils/mixins.py:83 project/utils/mixins.py:106
+msgid "registration"
+msgstr "регистрация"
+
+#: project/utils/mixins.py:87
+msgid "Investment"
+msgstr ""
+
+#: project/utils/mixins.py:88
+msgid "Proposal"
+msgstr ""
+
+#: project/utils/mixins.py:89
+msgid "Minimum deposit"
+msgstr ""
+
+#: project/utils/mixins.py:90
+msgid "Montly Return"
+msgstr ""
+
+#: project/utils/mixins.py:91
+msgid "Profit per day"
+msgstr ""
+
+#: project/utils/mixins.py:92
+msgid "Profit for the whole period"
+msgstr ""
+
+#: project/utils/mixins.py:93
+msgid "Total income (deposit + profit)"
+msgstr ""
+
+#: project/utils/mixins.py:94
+msgid "Your investments"
+msgstr ""
+
+#: project/utils/mixins.py:95
+msgid "Difficult rate"
+msgstr ""
+
+#: project/utils/mixins.py:96
+msgid "Investment term"
+msgstr ""
+
+#: project/utils/mixins.py:97
+msgid "months"
+msgstr ""
+
+#: project/utils/mixins.py:98
+msgid "Invest with us"
+msgstr ""
+
+#: project/utils/mixins.py:111
+msgid "Field is required"
+msgstr "Обязательно для заполнения"
+
+#: project/utils/mixins.py:112
+msgid "Enter a valid email"
+msgstr "Введите правильный формат почты"
+
+#: project/utils/mixins.py:113
+msgid "Enter a valid URL address"
+msgstr "Введите правильный URL адрес"
+
+#: project/utils/mixins.py:114
+msgid "The value is too short"
+msgstr "Значение слишком короткое"
+
+#: project/utils/notifications.py:4
+msgid "You have successfully entered"
+msgstr "Вы успешно авторизовались"
+
+#: project/utils/notifications.py:5
+msgid "You have successfully registered"
+msgstr "Вы успешно зарегистрировались"
+
+#: project/utils/notifications.py:6
+msgid "You have confirmed your account"
+msgstr "Вы подтвердили свой аккаунт"
+
+#~ msgid "Russian"
+#~ msgstr "Русский"
+
+#~ msgid "Go"
+#~ msgstr "Вперед"
+
+#~ msgid ""
+#~ "Generate your income with our diamond business. Invest without risk and "
+#~ "earn more than 20%% annually"
+#~ msgstr ""
+#~ "Создайте свой доход в нашем алмазном бизнесе. Инвестируйте без риска и "
+#~ "зарабатывайте более 20%% ежегодно"
+
+#~ msgid "Hello"
+#~ msgstr "Привет"
+
+#~ msgid "Logout"
+#~ msgstr "Выйти"

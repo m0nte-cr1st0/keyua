@@ -1,0 +1,144 @@
+{% if component.view_type == 1 %}
+    <div id="{{ component.unique_id }}" class="recent-case-screen">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="bg-wrap">
+                        <div class="green-title">
+                            <h2 class="title">{{ component.title }}</h2>
+
+                            {% comment %}
+                            {% if component.button_title %}
+                            	<a href="{{ component.button_url }}" class="details pull-right">
+                            		{{ component.button_title }}
+                            	</a>
+                            {% endif %}
+                            <div class="clear"></div>
+                            {% endcomment %}
+                        </div>
+
+                        {% if component.description %}
+	                        <div class="short-text">
+	                            {{ component.description }}
+	                        </div>
+	                    {% endif %}
+
+                        <div class="recent-items">
+                            <div class="row">
+                            	{% for project in component.projects.all %}
+	                                <div class="{% if forloop.first %}col-md-8{% else %}col-md-4{% endif %}">
+	                                    <div
+	                                    	class="recent-item js-block-link {% if forloop.first %}big{% else %}center-bg small-card{% endif %}"
+	                                    	style="background-image: url({{ project.background.url }})"
+	                                    	data-link="{{ project.button_url }}"
+	                                    >
+	                                        <div class="short-info">
+	                                        	{% if project.logo %}
+		                                            <div class="logo">
+		                                                <img src="{{ project.logo.url }}" alt="{{ project.title }}" />
+		                                            </div>
+	                                            {% endif %}
+	                                            <div class="cell">
+		                                            <div class="info">
+		                                                <div class="title up-size">{{ project.title }}</div>
+		                                                <div class="text up-size">
+		                                                	{% if project.short_description %}
+		                                                		{{ project.short_description }}
+		                                                	{% else %}
+		                                                		{{ project.description }}
+		                                                	{% endif %}
+		                                                </div>
+		                                            </div>
+		                                        </div>
+	                                        </div> <!-- .short-info -->
+	                                        
+	                                        <!--div class="hidden-info">
+	                                            <div class="title">{{ project.title }}</div>
+	                                            <div class="text">
+	                                                {{ project.description }}
+	                                            </div>
+
+	                                            <a href="{{ project.button_url }}" class="more-info" {% if project.nofollow_link %}rel="nofollow"{% endif %}>
+	                                                <div class="text">{{ project.button_title }}</div>
+	                                            </a>
+	                                        </div-->
+	                                    </div>
+	                                </div>
+                            	{% endfor %}
+                            </div>
+                        </div><!-- .recent-items -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- .recent-case-screen -->
+{% else %}
+    <div id="{{ component.unique_id }}" class="recent-case-screen grey-bottom">
+        <div class="container-fluid">
+
+        	<div class="row">
+        		<div class="col-md-12">
+		            <div class="green-title">
+		                <h2 class="title pull-left">{{ component.title }}</h2>
+		                {% if component.button_title %}
+		                	<a href="{{ component.button_url }}" class="details pull-right">
+		                		{{ component.button_title }}
+		                	</a>
+		                {% endif %}
+		                <div class="clear"></div>
+		            </div>
+
+		            {% if component.description %}
+		            <div class="short-text">
+		                {{ component.description }}
+		            </div>
+		            {% endif %}
+		        </div>
+	        </div>
+
+            <div class="recent-items project-cards">
+                <div class="row">
+                    <div class="bg-wrap">
+                    	{% for project in component.projects.all %}
+	                        <div class="col-md-6">
+	                            <div
+	                            	class="recent-item two-columns js-block-link"
+	                            	style="background-image: url({{ project.background.url }})"
+	                            	data-link="{{ project.button_url }}"
+	                            >
+	                                <div class="short-info">
+	                                	{% if project.logo %}
+		                                    <div class="logo">
+		                                        <img src="{{ project.logo.url }}" alt="" />
+		                                    </div>
+	                                    {% endif %}
+	                                    <div class="info">
+	                                        <div class="text">
+                                    		    {% if project.short_description %}
+                                            		{{ project.short_description }}
+                                            	{% else %}
+                                            		{{ project.description }}
+                                            	{% endif %}
+	                                        </div>
+	                                    </div>
+	                                </div> <!-- .short-info -->
+{% comment %}
+	                                <div class="hidden-info">
+	                                    <div class="title">{{ project.title }}</div>
+	                                    <div class="text">
+	                                        {{ project.description }}
+	                                    </div>
+	                                    <a href="{{ project.button_url }}" class="more-info" {% if project.nofollow_link %}rel="nofollow"{% endif %}>
+	                                        <div class="text">{{ project.button_title }}</div>
+	                                    </a>
+	                                </div>
+{% endcomment %}
+	                            </div>
+	                        </div> <!-- .col-md-6 -->
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}

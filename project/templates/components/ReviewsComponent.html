@@ -1,0 +1,45 @@
+{% load static %}
+
+<div id="{{ component.unique_id }}" class="customers-feedback">
+    <div class="container-fluid">
+        <div class="row">
+            {% if component.title or component.description %}
+                <div class="col-md-12">
+                    <div class="bg-wrap">
+                        {% if component.title %}
+                        <div class="green-title">
+                            <h2 class="title">
+                                {{ component.title|safe }}
+                            </h2>
+                        </div>
+                        {% endif %}
+
+                        {% if component.description %}
+                            <div class="short-text">
+                                {{ component.description|safe }}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endif %}
+
+            <div class="col-md-12">
+                <reviews-carousel></reviews-carousel>
+                {% if component.button_title %}
+                    <div class="company-review">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="review-block">
+                                    <a href="{{ component.button_url }}" class="review" target="_blank">
+                                        {{ component.button_title }}
+                                    </a>
+                                    <img src="{% static 'images/5.svg' %}" class="review-img" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,12 @@
+version: '2'
+web:
+  image: pagespeed/nginx-pagespeed
+  volumes:
+   - ./nginx:/etc/nginx/
+  ports:
+   - "80:80"
+   - "443:443"
+  network_mode: "host"
+  environment:
+   - NGINX_HOST=keyua.org
+   - NGINX_PORT=80

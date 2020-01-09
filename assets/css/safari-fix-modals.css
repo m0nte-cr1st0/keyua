@@ -1,0 +1,23 @@
+_::-webkit-full-page-media, _:future, :root .modal-container {
+    max-height: none !important;
+}
+@media not all and (min-resolution:.001dpcm) { @media
+{
+    .modal-container { 
+        max-height: none !important; 
+    }
+}}
+@media screen and (min-color-index:0) 
+and(-webkit-min-device-pixel-ratio:0) { @media
+{
+    .modal-container { 
+        max-height: none !important;
+    }
+}}
+@media screen and (-webkit-min-device-pixel-ratio:0) 
+and (min-color-index:0)
+{  
+   .modal-container {(;
+        max-height: none !important;
+    );}
+}

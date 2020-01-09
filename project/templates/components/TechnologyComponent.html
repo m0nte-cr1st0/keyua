@@ -1,0 +1,42 @@
+<div
+    id="{{ component.unique_id }}"
+    class="{% if not component.background %}our-competences{% else %}technologies{% endif %}"
+    {% if component.background %}style="background-image: url({{ component.background.url }})"{% endif %}
+>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="green-title white">
+                    <h2 class="title">{{ component.title|safe }}</h2>
+                </div>
+                {% if component.description %}
+                    <div class="short-text">
+                        {{ component.description|safe }}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="competences-list">
+            <div class="list-wrap">
+                <div class="row">
+                    {% for technology in component.technologies.all %}
+                        <div class="col-md-2 col-sm-4 col-xs-6">
+                            <div class="logo-wrap">
+                                <img src="{{ technology.logo.url }}" alt="{{ technology.title }}" />
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div> <!-- .list-wrap -->
+
+            {% if component.button_title %}
+            <div class="show-more">
+                    <a href="{{ component.button_url }}" class="green-button">{{ component.button_title }}</a>
+                </div>
+            {% endif %}
+        </div> <!-- .competences-list -->
+    </div>
+</div> <!-- .our-competences -->
+
+            

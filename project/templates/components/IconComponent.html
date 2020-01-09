@@ -1,0 +1,46 @@
+<div id="{{ component.unique_id }}" class="circle-container" {% if component.background %}style="background-image: url({{ component.background.url  }});"{% endif %}>
+    <div class="container-fluid">
+        {% if component.title or component.description %}
+            <div class="row">
+                <div class="col-md-12">
+                    {% if component.title %}
+                        <div class="green-title white">
+                            <h2 class="title">{{ component.title }}</h2>
+                        </div>
+                    {% endif %}
+                    {% if component.description %}
+                        <div class="short-text">
+                            {{ component.description }}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        {% endif %}
+
+        <div class="row">
+            {% for icon in component.icon_list.all %}
+                <div class="{{ component.css_class }}">
+                    <div class="circle-block">
+                        <div class="circle">
+                            <a href="{{ icon.link }}">
+                                {% if icon.icon %}
+                                    <img src="{{ icon.icon.url }}" class="circle-image" />
+                                {% endif %}
+                            </a>
+                        </div>
+                        <a href="{{ icon.link }}" class="circle-text">{{ icon.title }}</a>
+                    </div>
+                </div>
+            {% endfor %}
+
+            {% if component.button_url %}
+                <div class="col-md-12">
+                    <a href="{{ component.button_url }}" class="green-button">
+                        {{ component.button_title }}
+                    </a>
+                </div>
+            {% endif %}
+
+        </div>
+    </div>
+</div>

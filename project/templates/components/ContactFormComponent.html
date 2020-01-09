@@ -1,0 +1,18 @@
+<div id="{{ component.unique_id }}" class="keyua-screen get-in-touch">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <form class="get-in-touch-form">
+                    <h1 class="title {% if component.css_title_style %}{{ component.css_title_style }}{% endif %}">
+                        {{ component.title }}
+                    </h1>
+                    <p class="subtitle {% if component.css_subtitle_style %}{{ component.css_subtitle_style }}{% endif %}">
+                        {{ component.description }}
+                    </p>
+
+                    <contact-form></contact-form>
+                </form>
+            </div>
+        </div>
+    </div>
+</div> <!-- .keyua-screen -->

@@ -1,0 +1,20 @@
+<div class="header">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="phones pull-left">
+                    <span>us +1-202-555-0179</span>
+                    <span>uk +44 1632 960914</span>
+                    <span>uk +380 97 222 11 17</span>
+                </div>
+                <div class="languages pull-right">
+                    {% verbatim %}
+                        <div class="custom-select"> 
+                            <switch-languages :languages="languagesList" :language="currentLanguage"></switch-languages>
+                        </div>
+                    {% endverbatim %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div><!-- .header -->

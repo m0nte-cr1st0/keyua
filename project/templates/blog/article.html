@@ -1,0 +1,272 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load i18n %}
+
+{% block meta %}
+    <meta name="description" property="og:description" content="{{ article.meta_description }}" />
+    <meta name="keywords" content="{{ article.meta_keywords }}">
+    <meta property="og:type" content="article" />
+    <meta name="title" property="og:title" content="{{ article.meta_title }}" />
+    {% if article.small_image %}
+    	<meta property="og:image" content="{{ SITE_URL }}{{ article.small_image.url }}" />
+    {% endif %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/sharing.css' %}" />
+    <link rel="canonical" href="{{ SITE_URL }}{% url 'blog-article' article.url %}" />
+    <title>{{ article.meta_title }}</title>
+    {% include 'blog/includes/GA.html' %}
+{% endblock meta %}
+
+{% block js %}
+	{% if article.js_code %}
+		{{ article.js_code|safe }}
+	{% endif %}
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+	<script src="{% static 'js/rating.js' %}"></script>
+	<script src="{% static 'js/article.js' %}"></script>
+	<script>
+		(function ($) {
+		    $('.js-article-content p').each(function() {
+		    	var text = $(this).text();
+		    	if (!$(this).find('img').length && !$(this).find('iframe').length) {
+			    	if (!text || text == " " || text == "  ") {
+			    		$(this).remove();
+			    	}
+			    }
+		    });
+		}(jQuery));
+	</script>
+	<script src="//platform-api.sharethis.com/js/sharethis.js#property=5b3f2a14c5ed960011521b32&product=inline-share-buttons">
+	</script>
+	<script>
+		(function() { // DON'T EDIT BELOW THIS LINE
+		var d = document, s = d.createElement('script');
+		s.src = 'https://keyua.disqus.com/embed.js';
+		s.setAttribute('data-timestamp', +new Date());
+		(d.head || d.body).appendChild(s);
+		})();
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+{% endblock js %}
+
+{% block content %}
+<div itemscope itemtype="http://schema.org/NewsArticle">
+	<div itemprop="dateModified" content="{% now 'c' %}"></div>
+	<div class="keyua-screen articles" {% if article.header_background %}style="background-image: url({{ article.header_background.url }});"{% endif %}>
+	    <div class="container-fluid">
+	        <div class="row">
+	            <div class="col-md-12">
+	                <div id="id-mobile-menu" class="mobile-menu">
+	                    <a onClick="hideMenu();return false;" class="m-close"></a>
+	                    <ul>
+	                        {% for page in pages %}
+	                            <li><a href="{{ page.url }}" {% if page.id == current_page.id %}class="active"{% endif %}>{{ page.title }}</a></li>
+	                        {% endfor %}
+	                        <li><a class="active" href="{% url 'blog' %}">{% trans 'Blog' %}</a></li>
+	                    </ul>
+	                </div>
+	                <div class="menu">
+		                <div class="relative-part">
+		                	<a class="hamburger" onClick="showMenu();return false;"></a>
+		                    <div class="logo pull-left">
+		                        <a href="/">
+		                            <img src="{% static 'images/portal/keyua-logo-white.png' %}" alt="KeyUa" />
+		                        </a>
+		                    </div>
+		                    <div class="links pull-left">
+		                        <ul class="ul-inline">
+		                            {% for page in pages %}
+		                                {% if not page.is_index %}
+		                                    <li><a href="{{ page.url }}" {% if page.id == current_page.id %}class="active"{% endif %}>{{ page.title }}</a></li>
+		                                {% endif %}
+		                            {% endfor %}
+		                            <li><a href="{% url 'blog' %}">{% trans 'Blog' %}</a></li>
+		                        </ul>
+		                    </div>
+		                    <div class="button pull-right">
+		                        <a href="/contacts/" class="green-button height40">
+		                            {% trans 'Get a Quote' %}
+		                        </a>
+		                    </div>
+		                </div>
+	                </div><!-- .menu -->
+
+	                <div class="clear"></div>
+
+	                <div class="text-promo show-after-1s">
+	                    <div itemscope="" itemtype="http://schema.org/BreadcrumbList" class="page-breadcrumbs">
+	                        <span itemscope="" itemprop="itemListElement" itemtype="http://schema.org/ListItem">
+	                        	<a itemprop="item" href="/">
+	                        		<span itemprop="name">Keyua</span>
+	                        		<meta itemprop="position" content="1">
+	                        	</a>
+	                        </span>
+	                        <span class="separate">/</span> 
+	                        <span itemscope="" itemprop="itemListElement" itemtype="http://schema.org/ListItem">
+	                        	<a itemprop="item" href="{% url 'blog' %}">
+	                        		<span itemprop="name">{% trans 'Blog' %}</span>
+	                        		<meta itemprop="position" content="2">
+	                        	</a>
+	                        </span>
+	                        <span class="separate">/</span> 
+	                        <span itemscope="" itemprop="itemListElement" itemtype="http://schema.org/ListItem">
+	                        	<a itemprop="item" href="{{ article.category.get_url }}">
+	                        		<span itemprop="name">{{ article.category.title }}</span>
+	                        		<meta itemprop="position" content="3">
+	                        	</a>
+	                        </span>
+	                    </div>
+	                    <h1 itemprop="headline" class="title {% if article.title|length > 85 %}size-55{% endif %}">
+	                        {{ article.title }}
+	                    </h1>
+	                    <meta itemscope itemprop="mainEntityOfPage" itemType="https://schema.org/WebPage" itemid="{{ SITE_URL }}{% url 'blog-article' article.url %}" />
+	                    <meta itemprop="datePublished" content="{{ article.date|date:"Y-m-d" }}" />
+	                    {% if article.small_image %}
+					    	<meta itemprop="image" content="{{ SITE_URL }}{{ article.small_image.url }}" />
+					    {% endif %}
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div> <!-- .keyua-screen -->
+
+	<div class="article-content">
+	    <div class="container-fluid">
+	        <div class="row">
+	            <div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization" class="col-md-3">
+	            	<meta itemprop="name" content="{{ article.author.title }}" />
+					<div itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
+
+					  <meta itemprop="url" content="{{ article.small_image.url }}">
+					  <meta itemprop="width" content="400">
+					  <meta itemprop="height" content="60">
+					</div>
+	            	<div class="content hidden-block">
+		                <div class="content-title">CONTENTS</div>
+		                <div class="js-table-content">
+		                	<ul></ul>
+		                </div>
+	                </div>
+	            </div>
+	            <div class="js-article-content col-md-9">
+	            	<div class="author">
+	            		<div itemprop="author" itemscope itemtype="https://schema.org/Person"  class="row">
+	            			<div class="pull-left">
+			                    <img src="{{ article.author.background.url }}" itemprop="image" alt="{{ article.author.title }}" />
+		                    </div>
+		                        <a {% if article.author.linkedin_url %}href="{{ article.author.linkedin_url }}"{% else %}href="#" onClick="return false;"{% endif %} itemprop="url" class="linkedin" target="_blank">
+		                            <span itemprop="name">{{ article.author.title }}</span>
+		                        </a>
+		                    <div class="info"><span itemprop="jobTitle">{{ article.author.description }}</span></div>
+		                </div>
+	                </div> <!-- .author -->
+	                <div class="article">
+	                    {% if article.intro %}<div itemprop="description" class="short-article">{{ article.intro|safe }}</div>{% endif %}
+	                    <div class="content visible-sm visible-xs">
+		                	<div class="content-title">CONTENTS</div>
+		                	<div class="js-table-content">
+		                		<ul></ul>
+		                	</div>
+		                </div>
+	                    <div itemprop="articleBody">{{ article.contents|safe }}</div>
+	                    <hr />
+		                <div itemscope itemtype="http://schema.org/AggregateRating" itemprop="aggregateRating" id="js-rating" class="article">
+		                	<div id="js-voting" class="voting">
+								<a class="stars"
+								   data-pk="1">
+								</a>
+								<a class="stars"
+								   data-pk="2">
+								</a>
+								<a class="stars"
+								   data-pk="3">
+								</a>
+								<a class="stars"
+								   data-pk="4">
+								</a>
+								<a class="stars"
+								   data-pk="5">
+								</a>
+
+		                		<meta itemprop='worstRating' content='1' />
+								<meta itemprop='bestRating' content='5' />
+								
+								<div class="clear"></div>
+
+		                		<div class="info">
+		                			Average rating:<span itemprop="ratingValue" class="average">1</span> of <span itemprop="ratingCount" class="all">1</span>
+								</div>
+		                	</div>
+		               	</div>
+		               	<hr />
+	                </div> <!-- .article -->
+	                <!-- Sharingbutton Facebook -->
+					<div class="article centered">
+						<div class="sharethis-inline-share-buttons"></div>
+					</div>
+	                <div class="article">
+	                    <div class="buttons">
+	                        <div class="row">
+	                            <div class="col-sm-4">
+	                                <a href="/company/" class="green-button">About Keyua</a>
+	                            </div>
+	                            <div class="col-sm-4">
+	                                <a href="/projects/" class="green-button">Our projects</a>
+	                            </div>
+	                            <div class="col-sm-4">
+	                                <a href="/services/" class="green-button">Our services</a>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+
+	                <div class="article">
+	                	<div id="disqus_thread" class="discus-wrap"></div>
+	               	</div>
+	            </div>
+	        </div>
+	    </div>
+	</div> <!-- .article-content -->
+
+	{% if article.related_articles.count %}
+	<div class="our-competences relative">
+	    <div class="container-fluid">
+	    	<div class="row">
+	    		<div class="col-md-9">
+			        <div class="row">
+			            <div class="col-md-12">
+			                <div class="green-title">
+			                    <div class="title">{% trans 'Related publications' %}</div>
+			                </div>
+			            </div>
+			        </div>
+			        <div class="related-articles">
+			            <div class="row">
+			                {% for article in article.related_articles.all %}
+			                    <div class="col-md-4 col-sm-6 col-xs-12">
+			                        <div class="person">
+			                            {% if article.small_image %}
+			                            <div class="image">
+			                                <a href="{{ article.get_url }}">
+			                                    <img src="{{ article.small_image.url }}" alt="" />
+			                                </a>
+			                            </div>
+			                            {% endif %}
+			                            <div class="info">
+			                                <div class="date">{{ article.date }}</div>
+			                                <a href="{{ article.get_url }}" class="name">{{ article.title|truncatechars:43 }}</a>
+			                                <div class="position">{{ article.category.title }}</div>
+			                            </div>
+			                        </div>
+			                    </div>
+			                {% endfor %}
+			            </div>
+			        </div> <!-- .related-articles -->
+			    </div>
+		    </div>
+	    </div>
+	</div> <!-- .our-competences -->
+	{% endif %}
+</div>
+{% endblock content %}

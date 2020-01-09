@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block meta %}
+    <meta name="title" property="og:title" content="Software development blog - KeyUA{% if current_page and current_page != 1 %} Page {{ current_page }}{% endif %}" />
+    <title>Software development blog - KeyUA{% if current_page and current_page != 1 %} Page {{ current_page }}{% endif %}</title>
+    <link rel="canonical" href="{{ SITE_URL }}{% url 'blog' %}" />
+    {% if articles.has_previous %}
+        {% if articles.previous_page_number == 1 %}
+    	    <link href="{{ SITE_URL }}{% url 'blog' %}" rel="prev" />
+        {% else %}
+            <link href="{{ SITE_URL }}{% url 'blog' articles.previous_page_number %}" rel="prev" />
+        {% endif %}
+    {% endif %}
+    {% if articles.has_next %}
+    	<link href="{{ SITE_URL }}{% url 'blog' articles.next_page_number %}" rel="next" />
+    {% endif %}
+{% endblock meta %}
+
+{% block GA %}
+    {% include 'blog/includes/GA.html' %}
+{% endblock %}
+
+{% block content %}
+	{% include 'blog/includes/blog_header.html' %}
+	{% include 'blog/includes/articles_list.html' %}
+{% endblock content %}
+
+orm = PasswordChangeForm(request.user, request.POST)
+
+    if form.is_valid():
+        user = form.save()
+        update_session_auth_hash(request, user)  # Important!
+        messages.success(request, 'Your password was successfully updated!')
+    else:
+        messages.error(request, 'Please correct the error below.')
+else:
+    form = PasswordChangeForm(request.user)

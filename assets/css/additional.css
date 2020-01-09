@@ -1,0 +1,262 @@
+/* Modal Styles */
+.modal-mask {
+  position: fixed;
+  z-index: 9998;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: table;
+  transition: opacity .3s ease;
+}
+.modal-mask .modal-wrapper {
+  display: table-cell;
+  vertical-align: middle;
+}
+@media (max-width: 600px) {
+  .modal-mask .modal-wrapper .modal-header h3 {
+    font-size: 20px;
+    margin-bottom: 0;
+  }
+}
+.modal-mask .modal-wrapper .modal-container {
+  margin: 0px auto;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
+  transition: all .3s ease;
+  max-height: 100%;
+  overflow-y: auto;
+}
+.modal-mask .modal-wrapper .modal-container .form-row .label-row {
+  position: relative;
+}
+.modal-mask .modal-wrapper .modal-container .form-row .label-row .valid-input {
+  top: 4px;
+  right: 0 !important;
+}
+.modal-mask .modal-wrapper .modal-container.buy-package h3 {
+  margin-bottom: 10px;
+}
+.modal-mask .modal-wrapper .modal-container.buy-package .form-row {
+  margin-bottom: 18px;
+}
+.modal-mask .modal-wrapper .modal-container.buy-package .form-error {
+  color: #ff0000;
+  margin-bottom: 15px;
+}
+.modal-mask .modal-wrapper .modal-container.buy-package .form-hint {
+  color: #95a5a6;
+}
+.modal-mask .modal-wrapper .modal-container.buy-package .selected-package .bonus-checkbox {
+  position: relative;
+  padding-left: 32px;
+  font-size: 13px;
+  color: #3c535f;
+  margin: 30px 0;
+}
+.modal-mask .modal-wrapper .modal-container.buy-package .selected-package .bonus-checkbox input[type="checkbox"]:not(:checked),
+.modal-mask .modal-wrapper .modal-container.buy-package .selected-package .bonus-checkbox input[type="checkbox"]:checked {
+  position: absolute;
+  left: -9999px;
+}
+.modal-mask .modal-wrapper .modal-container.buy-package .selected-package .bonus-checkbox input[type="checkbox"]:not(:checked) + label:before,
+.modal-mask .modal-wrapper .modal-container.buy-package .selected-package .bonus-checkbox input[type="checkbox"]:checked + label:before {
+  content: '';
+  position: absolute;
+  width: 21px;
+  height: 21px;
+  background: #f0f2f3;
+  border-radius: 4px;
+  top: 0;
+  left: 0;
+  cursor: pointer;
+}
+.modal-mask .modal-wrapper .modal-container.buy-package .selected-package .bonus-checkbox input[type="checkbox"]:not(:checked) + label:after,
+.modal-mask .modal-wrapper .modal-container.buy-package .selected-package .bonus-checkbox input[type="checkbox"]:checked + label:after {
+  content: url(../images/checked-icon.png);
+  position: absolute;
+  width: 21px;
+  height: 21px;
+  transition: all .2s;
+  top: 0;
+  left: 6px;
+  cursor: pointer;
+}
+.modal-mask .modal-wrapper .modal-container.buy-package .selected-package .bonus-checkbox [type="checkbox"]:not(:checked) + label:after {
+  opacity: 0;
+  transform: scale(0);
+}
+.modal-mask .modal-wrapper .modal-container.buy-package .selected-package .bonus-checkbox [type="checkbox"]:checked + label:after {
+  opacity: 1;
+  transform: scale(1);
+}
+.modal-mask .modal-wrapper .modal-container.buy-package .selected-package .title {
+  background: url(../images/incheck-icon.png) no-repeat;
+  color: #3c535f;
+  font-family: MontserratBold;
+  font-size: 25px;
+  text-transform: uppercase;
+  line-height: 23px;
+  padding-left: 35px;
+  margin-bottom: 18px;
+}
+.modal-mask .modal-wrapper .modal-container.buy-package .selected-package .title span {
+  color: #51c75b;
+}
+.modal-mask .modal-wrapper .modal-container.buy-package .selected-package .cost {
+  font-size: 14px;
+  text-transform: uppercase;
+  color: #3c535f;
+}
+.modal-mask .modal-wrapper .modal-container.buy-package .full-summ {
+  font-family: MontserratBold;
+  margin: 25px 0;
+  font-size: 18px;
+  text-transform: uppercase;
+  color: #51c75b;
+}
+.modal-mask .modal-wrapper .modal-container.buy-package label.width60 {
+  width: 60%;
+  float: left;
+}
+.modal-mask .modal-wrapper .modal-container.buy-package label.width60 input[type="text"] {
+  width: 47%;
+}
+.modal-mask .modal-wrapper .modal-container.buy-package label.width60 input[type="text"].second {
+  float: right;
+}
+.modal-mask .modal-wrapper .modal-container.buy-package label.width30 {
+  width: 30%;
+  float: right;
+}
+.modal-mask .modal-wrapper .modal-container.buy-package label span {
+  display: block;
+  margin-bottom: 10px;
+}
+.modal-mask .modal-wrapper .modal-container.buy-package label input[type="text"] {
+  height: 44px;
+  width: 100%;
+  background: #f8f9fa;
+  border: 1px solid #ebebeb;
+  border-radius: 5px;
+  padding: 0 15px;
+}
+.modal-mask .modal-wrapper .modal-container.buy-package label input[type="text"].card {
+  background-image: url(../images/card-icon.png);
+  background-repeat: no-repeat;
+  background-position: 97% 12px;
+}
+.modal-mask .modal-wrapper .modal-container.buy-package .info {
+  color: #8497a0;
+  margin-top: 10px;
+}
+.modal-mask .modal-wrapper .modal-container .modal-header h3 {
+  margin-top: 0;
+}
+.modal-mask .modal-wrapper .modal-container .modal-body {
+  margin: 20px 0;
+}
+.modal-mask .modal-wrapper .modal-container .modal-default-button {
+  float: right;
+}
+.modal-mask .modal-wrapper .modal-container.history-modal .modal-header h3 {
+  margin-bottom: 10px;
+}
+.modal-mask .modal-wrapper .modal-container.history-modal .modal-body {
+  padding-bottom: 30px;
+  max-height: 450px;
+  overflow-y: auto;
+}
+@media (max-width: 600px) {
+  .modal-mask .modal-wrapper .modal-container.history-modal .modal-body {
+    /* Hide table headers (but not display: none;, for accessibility) */
+    /*
+                        Label the data
+                        */
+  }
+  .modal-mask .modal-wrapper .modal-container.history-modal .modal-body table,
+  .modal-mask .modal-wrapper .modal-container.history-modal .modal-body thead,
+  .modal-mask .modal-wrapper .modal-container.history-modal .modal-body tbody,
+  .modal-mask .modal-wrapper .modal-container.history-modal .modal-body th,
+  .modal-mask .modal-wrapper .modal-container.history-modal .modal-body td,
+  .modal-mask .modal-wrapper .modal-container.history-modal .modal-body tr {
+    display: block;
+  }
+  .modal-mask .modal-wrapper .modal-container.history-modal .modal-body thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+  .modal-mask .modal-wrapper .modal-container.history-modal .modal-body tr {
+    border: 1px solid #eee;
+  }
+  .modal-mask .modal-wrapper .modal-container.history-modal .modal-body td {
+    /* Behave  like a "row" */
+    border: none;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    padding-left: 50%;
+    background: #fff;
+  }
+  .modal-mask .modal-wrapper .modal-container.history-modal .modal-body td:before {
+    /* Now like a table header */
+    position: absolute;
+    /* Top/left values mimic padding */
+    top: 10px;
+    left: 10px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+  }
+  .modal-mask .modal-wrapper .modal-container.history-modal .modal-body td:nth-of-type(1):before {
+    content: "When?";
+  }
+  .modal-mask .modal-wrapper .modal-container.history-modal .modal-body td:nth-of-type(2):before {
+    content: "Answer Time";
+  }
+  .modal-mask .modal-wrapper .modal-container.history-modal .modal-body td:nth-of-type(3):before {
+    content: "Status";
+  }
+}
+.modal-mask .modal-wrapper .modal-container.billing-address-modal .modal-header h3 {
+  margin-bottom: 10px;
+}
+.modal-mask .modal-wrapper .modal-container.billing-address-modal .billing-form .form-row {
+  margin-bottom: 10px;
+}
+.modal-mask .modal-wrapper .modal-container.billing-address-modal .billing-form .form-row input[type="text"] {
+  width: 100%;
+}
+.modal-mask .modal-wrapper .modal-container.billing-address-modal .billing-form .form-row button {
+  width: 100%;
+  max-width: 100%;
+}
+/*
+ * The following styles are auto-applied to elements with
+ * transition="modal" when their visibility is toggled
+ * by Vue.js.
+ *
+ * You can easily play with the modal transition by editing
+ * these styles.
+ */
+.modal-enter,
+.modal-leave-active {
+  opacity: 0;
+}
+.modal-enter .modal-container,
+.modal-leave-active .modal-container {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
+/* End Modal Styles */
+/* Animation styles */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+/* End */

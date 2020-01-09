@@ -1,0 +1,62 @@
+{% extends 'base_outer.html' %}
+{% load static %}
+
+{% block js %}
+	{% if not bad_invite %}
+		<script type="text/javascript">
+			var INVITED_EMAIL = "{{ invite.email }}",
+				INVITATION_KEY = "{{ invite.key }}",
+				REGISTRATION_URL = "{% url 'inauth-login' %}",
+				NEXT_URL = "{% url 'incheck-dashboard' %}";
+		</script>
+		<script type="text/javascript" src="{% static 'js/src/validator.js' %}"></script>
+		<script type="text/javascript" src="{% static 'js/src/registrationFromInvite.vue.js' %}"></script>
+	{% endif %}
+{% endblock js %}
+
+{% block content %}
+	<div class="content">
+		<div class="outer-wrap center">
+			<div class="logo">
+				<a href="/"><img src="{% static 'images/landing/logo.png' %}" title="Incheck.Site" /></a>
+			</div>
+			<div class="logo-text">
+				Incheck is a professional resource for site owners and system administrators.
+			</div>
+
+			{% if bad_invite %}
+				<p>Sorry, this invitation link is deprecated or has been used.</p>
+			{% else %}
+				<div class="form">
+					<div>
+						<label>Email:</label>
+						<input type="text" value="{{ invite.email }}" disabled />
+					</div>
+					{% verbatim %}
+						<div id="registrationFromInvite">
+							<label>Your name:</label>
+							<div class="input-wrapper">
+								<input v-model="firstName" type="text" />
+	                            <i v-show="nameErrors[0]" class="valid-input"></i>
+	                            <i v-show="!nameErrors[0]" class="invalid-input"></i>
+							</div>
+
+							<label>Password:</label>
+							<div class="input-wrapper">
+								<input v-model="password" type="password" />
+	                            <i v-show="passwordErrors[0]" class="valid-input"></i>
+	                            <i v-show="!passwordErrors[0]" class="invalid-input"></i>
+							</div>
+							<div class="actions">
+			                    <button
+			                        :disabled="!isFormValid"
+			                        @click="sendForm"
+			                  	>Send</button>
+							</div>
+						</div>
+					{% endverbatim %}
+				</div>
+			{% endif %}
+		</div>
+	</div>
+{% endblock content %}

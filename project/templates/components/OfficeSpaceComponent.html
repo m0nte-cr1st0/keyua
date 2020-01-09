@@ -1,0 +1,40 @@
+{% load static %}
+<div id="{{ component.unique_id }}" class="our-competences">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="green-title white">
+                    <h2 class="title">{{ component.title }}</h2>
+                </div>
+                <div class="short-text">
+                    {{ component.description }}
+                </div>
+            </div>
+        </div>
+
+        <div class="office-images">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="col-sm-6">
+                        <img src="{% static 'images/portal/office-half-1.jpg' %}" alt="" />
+                        <img src="{% static 'images/portal/office-vertical-half-2.jpg' %}" alt="" />
+                    </div>
+                    <div class="col-sm-6">
+                        <img src="{% static 'images/portal/office-vertical-full.png' %}" alt="" />
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="col-sm-6">
+                        <img src="{% static 'images/portal/ofice-half-3.jpg' %}" alt="" />
+                    </div>
+                    <div class="col-sm-6">
+                        <img src="{% static 'images/portal/office-half-4.jpg' %}" alt="" />
+                    </div>
+                    <div class="col-sm-12">
+                        <img src="{% static 'images/portal/office-horizontal.jpg' %}" alt="" />
+                    </div>
+                </div>
+            </div>
+        </div> <!-- .office-images -->
+    </div>
+</div>

@@ -1,0 +1,73 @@
+{% if component.css_style == 1 %}
+    <div id="{{ component.unique_id }}" class="recent-case-screen p85" {% if component.background %}style="background-image: url({{ component.background.url }})"{% endif %}>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="bg-wrap">
+                        <div class="green-title">
+                            <h2 class="title">{{ component.title|safe }}</h2>
+                        </div>
+
+                        <div class="short-text">
+                            {{ component.description|safe }}
+                        </div>
+
+                        <div class="facts">
+                            <div class="row">
+                                {% for tile_column in component.tilecolumncomponent_set.all %}
+                                    <div class="{{ component.column_count }}">
+                                        {% if tile_columncolumn.url %}
+                                            <a href="{{ tile_columncolumn.url }}">
+                                        {% endif %}
+                                        <div class="fact {{ tile_column.column.css_icon }} {% if tile_column.column.hover_background %}hovered{% endif %}" {% if tile_column.column.hover_background %}style="background-image:url({{ tile_column.column.hover_background.url }})"{% endif %}>
+                                            <div class="title">{{ tile_column.column.title|safe }}</div>
+                                            <div class="text">{{ tile_column.column.description|safe }}</div>
+                                        </div>
+                                        {% if tile_column.column.url %}</a>{% endif %}
+                                    </div> 
+                                {% endfor %}
+                            </div>
+                        </div> <!-- .facts -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- .recent-case-screen -->
+{% else %}
+    <div class="our-competences" {% if component.background %}style="background-image: url({{ component.background.url }})"{% endif %}>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="green-title white">
+                        <div class="title">{{ component.title }}</div>
+                    </div>
+                    <div class="short-text">
+                        {{ component.description }}
+                    </div>
+                </div>
+            </div>
+
+            <div
+                class="
+                    advanced-experience
+                    grey-arrow-bottom
+                    fix-right
+                    tile-style{{ component.css_style }}
+                    {% if tile_column.column.url %}js-block-link{% endif %}
+                "
+                {% if tile_column.column.url %}data-link="{{ tile_column.column.url }}"{% endif %}
+            >
+                <div class="row">
+                    {% for tile_column in component.tilecolumncomponent_set.all %}
+                        <div class="{{ component.column_count }}">
+                            <div class="expr {{ tile_column.column.css_icon }} {% if tile_column.column.hover_background %}hovered{% endif %}" {% if tile_column.column.hover_background %}style="background-image:url({{ tile_column.column.hover_background.url }})"{% endif %}>
+                                <div class="title">{{ tile_column.column.title|safe }}</div>
+                                <div class="description">{{ tile_column.column.description|safe }}</div>
+                            </div>
+                        </div><!-- .expr -->
+                    {% endfor %}
+                </div>
+            </div> <!-- .advanced-experience -->
+        </div>
+    </div>
+{% endif %}

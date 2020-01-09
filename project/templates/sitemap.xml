@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+  xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
+{% spaceless %}
+{% for page in pages %}
+	<url>
+		<loc>{% if page.url == '/' %}{{ domain }}/{% else %}{{ domain }}{{ page.url }}{% endif %}</loc>
+		<lastmod>{{ page.last_mod|date:"Y-m-d" }}</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>{% if page.url == '/' %}1.0{% else %}0.9{% endif %}</priority>
+	</url>
+{% endfor %}
+
+<url>
+	<loc>{{ domain }}{% url 'blog' %}</loc>
+	<lastmod>{{ last_blog_mod|date:"Y-m-d" }}</lastmod>
+	<changefreq>weekly</changefreq>
+	<priority>0.8</priority>
+</url>
+
+{% for article in articles %}
+	<url>
+		<loc>{{ domain }}{{ article.get_url }}</loc>
+		<lastmod>{{ article.last_mod|date:"Y-m-d" }}</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+{% endfor %}
+
+{% endspaceless %}
+</urlset>

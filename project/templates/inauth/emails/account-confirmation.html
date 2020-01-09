@@ -1,0 +1,11 @@
+{% extends 'emails/base.html' %}
+
+{% block content %}
+	<div style="font-size:18px;color:#8497a0;margin-bottom:30px;">
+		Hi {{ data.name|title }},
+	</div>
+
+	<div style="font-size:13px;color:#8497a0;margin-bottom:30px;">
+		please confirm your email. To do it please follow the link <a href="{{ data.confirmation_link }}" target="_blank" style="color:#51c75b;">{{ data.confirmation_link }}</a>
+	</div>
+{% endblock content %}

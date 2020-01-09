@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block meta %}
+    <meta name="title" property="og:title" content="{{ current_category.meta_title }}{% if current_page and current_page != 1 %} Page {{ current_page }}{% endif %}" />
+    <meta name="description" property="og:description" content="{{ current_category.meta_description }}" />
+    <meta name="keywords" content="{{ current_category.meta_keywords }}" />
+    <meta name="robots" content="noindex,follow" />
+    <link rel="canonical" href="{{ SITE_URL }}{% url 'blog-category' current_category.url %}{% if current_page and current_page != 1 %}{{ current_page }}/{% endif %}" />
+    {% if articles.has_previous %}
+        {% if articles.previous_page_number == 1 %}
+    	   <link href="{{ SITE_URL }}{% url 'blog-category' current_category.url %}" rel="prev" />
+        {% else %}
+            <link href="{{ SITE_URL }}{% url 'blog-category' current_category.url articles.previous_page_number %}" rel="prev" />
+        {% endif %}
+    {% endif %}
+    {% if articles.has_next %}
+    	<link href="{{ SITE_URL }}{% url 'blog-category' current_category.url articles.next_page_number %}" rel="next" />
+    {% endif %}
+    <title>{{ current_category.meta_title }}{% if current_page and current_page != 1 %} Page {{ current_page }}{% endif %}</title>
+{% endblock meta %}
+
+{% block js %}
+	{% if current_category.js_code %}
+		{{ current_category.js_code|safe }}
+	{% endif %}
+    % include 'blog/includes/GA.html' %}
+{% endblock js %}
+
+{% block content %}
+	{% include 'blog/includes/blog_header.html' %}
+	{% include 'blog/includes/articles_list.html' %}
+{% endblock content %}

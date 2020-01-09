@@ -1,0 +1,36 @@
+<div id="{{ component.unique_id }}" class="organized-screen {{ component.css_style }}" {% if component.background %}style="background-image: url({{ component.background.url }})"{% endif %}>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="green-title white-color">
+                    <h2 class="title">{{ component.title|safe }}</h2>
+                </div>
+                <div class="short-text white">
+                   {{ component.description|safe }}
+                </div>
+            </div>
+        </div>
+
+        <div class="organize-items">
+            <div class="row">
+                {% for column in component.columns.all %}
+                    <div class="{{ component.columns_count }}">
+                        <div class="item">
+                            <div class="title">{{ column.title|safe }}</div>
+                            <div class="text">{{ column.description|safe }}</div>
+                        </div>
+                    </div>
+                {% endfor %}
+                
+                {% if component.button_title %}
+                    <div class="{{ component.columns_count }}">
+                        <div class="show-more">
+                            <a href="{{ component.button_url }}" class="green-button">{{ component.button_title }}</a>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div> <!-- .orginize-items -->
+    </div>
+</div> <!-- .organized-screen -->
+

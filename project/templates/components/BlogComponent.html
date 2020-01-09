@@ -1,0 +1,29 @@
+{% load static %}
+<div id="{{ component.unique_id }}" class="our-competences relative">
+    <div class="container-fluid">
+        <div class="blog-filters">
+            <div class="row">
+                <div class="col-md-9">
+                    <ul class="ul-inline">
+                        {% for cat_page in categories %}
+                            <li>
+                                <a href="{{ cat_page.get_url }}" {% if current_cat.id == cat_page.id %}class="active"{% endif %}>
+                                    {{ cat_page.title }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    {% if marked_category %}
+                        <a href="{{ marked_category.get_url }}" class="green-button">
+                            {{ marked_category.title }}
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div> <!-- .blog-filters -->
+
+        <blog-carousel></blog-carousel>
+    </div>
+</div> <!-- .our-competences -->

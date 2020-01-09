@@ -1,0 +1,40 @@
+<div id="{{ component.unique_id }}" class="recent-case-screen p85">
+    <div class="container-fluid container-fluid1">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="bg-wrap">
+                    <div class="green-title">
+                        <h2 class="title">
+                            {{ component.title|safe }}
+                        </h2>
+                    </div>
+
+                    {% if component.description %}
+                        <div class="short-text">
+                            {{ component.description|safe }}
+                        </div>
+                    {% endif %}
+
+                    <div class="facts">
+                        <div class="row">
+                            {% for city in component.cities.all %}
+                                <div class="col-sm-4 col-xs-12">
+                                    <div class="city" style="background-image:url({{ city.background.url }})">
+                                        <div class="short">
+                                            <div class="all-content">
+                                                <div class="title">{{ city.title }}</div>
+                                                <div class="text">{{ city.description|safe }}</div>
+                                                <div class="more-text">{{ city.more_text }}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div> <!-- .facts -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div> <!-- .recent-case-screen -->

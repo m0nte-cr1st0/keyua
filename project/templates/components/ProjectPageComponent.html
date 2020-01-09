@@ -1,0 +1,161 @@
+{% load static i18n %}
+<div class="project-details-page">
+
+    <div id="{{ component.unique_id }}" class="keyua-screen white-menu ico" style="background-image: url({{ component.background.url  }});">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="id-mobile-menu" class="mobile-menu">
+                        <a onClick="hideMenu();return false;" class="m-close"></a>
+                        <ul>
+                            {% for page in pages %}
+                                <li><a href="{{ page.url }}" {% if page.id == current_page.id %}class="active"{% endif %}>{{ page.title }}</a></li>
+                            {% endfor %}
+                            <li><a href="{% url 'blog' %}">{% trans 'Blog' %}</a></li>
+                        </ul>
+                    </div>
+                    <div class="menu">
+                        <div class="relative-part">
+                            <a class="hamburger" onClick="showMenu();return false;"></a>
+                            <div class="logo pull-left">
+                                <a href="/">
+                                    <img src="{% static 'images/portal/keyua-logo-white.png' %}" alt="KeyUA" />
+                                </a>
+                            </div>
+                            <div class="links pull-left">
+                                <ul class="ul-inline">
+                                    {% for page in pages %}
+                                        {% if not page.is_index %}
+                                            <li><a href="{{ page.url }}" {% if page.id == current_page.id %}class="active"{% endif %}>{{ page.title }}</a></li>
+                                        {% endif %}
+                                    {% endfor %}
+                                    <li><a href="{% url 'blog' %}">{% trans 'Blog' %}</a></li>
+                                </ul>
+                            </div>
+                            <div class="button pull-right">
+                                <a href="/contacts/" class="green-button height40 orange-color">{% trans 'Get a Quote' %}</a>
+                            </div>
+                        </div>
+                    </div><!-- .menu -->
+
+                    <div class="clear"></div>
+
+                    <div class="text-promo show-after-1s">
+
+                        {% if current_page.show_breadcrumbs %}
+                            <div class="page-breadcrumbs">
+                                {{ current_page.get_breadcrumbs|safe }}
+                            </div>
+                        {% endif %}
+
+                        <div class="row">
+                            <div class="container-fluid text-center">
+                                <div class="col-md-12">
+                                    <div class="title">
+                                        {# component.project.title #}
+                                        <img src="{{ component.project.logo.url }}" alt="{{ component.project.title }}" />
+                                    </div>
+                                    <div class="sub-title">
+                                        {{ component.header_text|linebreaks }}
+                                    </div>
+                                    <div class="buttons">
+                                        <a href="{{ component.project_url }}" class="green-button width280 site-button" target="_blank" rel="nofollow">{% trans "Visit client's website" %}</a>
+                                    </div>
+                                </div>
+                                <!--div class="col-md-4 text-center">
+                                    {% if component.project.logo %}
+                                        <div class="client-logo">
+                                            <img src="{{ component.project.logo.url }}" alt="{{ component.project.title }}" />
+                                        </div>
+                                    {% endif %}
+                                </div-->
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- .keyua-screen -->
+
+    <!--a href="{{ component.projects_page_url }}" class="back-button"></a-->
+
+    <div class="client-info">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-3 col-sm-6 centered">
+                    <div class="info-item location">
+                        <div class="text">{% trans 'Location' %}</div>
+                        <div class="title">{{ component.location_text }}</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 centered">
+                    <div class="info-item industry">
+                        <div class="text">{% trans 'Industry' %}</div>
+                        <div class="title">{{ component.industry_text }}</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 centered">
+                    <div class="info-item team">
+                        <div class="text">{% trans 'Team size' %}</div>
+                        <div class="title">{{ component.team_size_text }}</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 centered">
+                    <div class="info-item period">
+                        <div class="text">{% trans 'Partnership period' %}</div>
+                        <div class="title">{{ component.period_text }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% if component.achievements.count %}
+        <div class="wrap-achievement">
+            <div class="achievement">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="custom-scroll">
+                                <div class="achievement-span">{% trans 'Achievement' %}</div>
+                                <input id="achievements" type="hidden" value="{% for arch in component.achievements.all %}{{ arch.title }}{% if not forloop.last %},{% endif %}{% endfor %}" />
+                                {% verbatim %}
+                                    <achivements-carousel></achivements-carousel>
+                                {% endverbatim %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if component.technology_component %}
+        {% include 'components/TechnologyComponent.html' with component=component.technology_component %}
+    {% endif %}
+
+    {% if component.facts %}
+        <div class="key-facts">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="green-title gray">
+                            <div class="title">{% trans 'Key facts' %}</div>
+                        </div>
+                    </div>
+                    {% for fact in component.facts.all %}
+                        <div class="col-md-4 col-sm-6">
+                            <div class="fact">
+                                <div class="title">{{ fact.title }}</div>
+                                <div class="text">
+                                    {{ fact.description }} 
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+</div>

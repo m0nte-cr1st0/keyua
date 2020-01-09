@@ -1,0 +1,38 @@
+<div id="{{ component.unique_id }}" class="our-competences">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="green-title white">
+                    <h2 class="title">{{ component.title }}</h2>
+                </div>
+                <div class="short-text">
+                    {{ component.description }}
+                </div>
+            </div>
+        </div>
+
+        <div class="team-list">
+            <div class="row">
+                {% for member in component.members.all %}
+                    <div class="col-sm-3">
+                        <div class="person">
+                            <div class="image">
+                                <img src="{{ member.photo.url }}" alt="" />
+                                {% if member.linkedin_url %}
+                                <div class="linkedin">
+                                    <a href="{{ member.linkedin_url }}" target="__blank"></a>
+                                </div>
+                                {% endif %}
+                            </div>
+                            <div class="info">
+                                <div class="name">{{ member.title }}</div>
+                                <div class="position">{{ member.position }}</div>
+                                <div class="text">{{ member.description }}</div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div> <!-- .team-list -->
+    </div>
+</div>

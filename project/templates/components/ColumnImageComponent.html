@@ -1,0 +1,33 @@
+<div id="{{ component.unique_id }}" class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="green-title">
+                <h2 class="title">{{ component.title }}</h2>
+            </div>
+            <div class="short-text">
+                {{ component.description }}
+            </div>
+        </div>
+    </div>
+
+    <div class="project-to-product">
+        <div class="row">
+            {% for column in component.columns.all  %}
+                <div class="{{ component.columns_count }}">
+                    <div
+                        class="item js-block-link"
+                        data-link="{{ column.button_url }}"
+                        style="background-image: url({{ column.background.url }})"
+                    >
+                        <div class="content">
+                            <div class="text-content">
+                                <div class="title">{{ column.title }}</div>
+                                <div class="description">{{ column.description|linebreaks }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div> <!-- .project-to-product -->
+</div>
